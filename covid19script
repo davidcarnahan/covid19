@@ -8,7 +8,7 @@ today = today.strftime('%m-%d-%Y')
 import pandas as pd
 taburl = 'https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/' \
         + today + '.csv'
-covid19 = pd.read_html(url)
+covid19 = pd.read_html(taburl)
 
 # convert list to dataframe & cleanup
 covid19_df = covid19[0]
