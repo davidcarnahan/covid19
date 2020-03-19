@@ -15,9 +15,12 @@ covid19_df = covid19[0]
 covid19_df = covid19_df.iloc[ : , 1: ]
 covid19_df
 
+# create unique filename for daily version of data
+filenm = 'covid19_df' + today + '.csv'
+
 #write dataframe to csv file
 bucket = 'your-bucket-name'
 csv_buffer = StringIO()
 opp_df.to_csv(csv_buffer, index = False)
 s3_resource = boto3.resource('s3')
-s3_resource.Object(bucket, your-file-name).put(Body=csv_buffer.getvalue())
+s3_resource.Object(bucket, filenm).put(Body=csv_buffer.getvalue())
