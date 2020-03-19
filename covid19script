@@ -1,0 +1,23 @@
+# create today variable for naming convention
+import datetime
+today = datetime.datetime.today()
+today = today.strftime('%m-%d-%Y')
+
+
+# grab data daily from source (johns hopkins)
+import pandas as pd
+taburl = 'https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_daily_reports/' \
+        + today + '.csv'
+covid19 = pd.read_html(url)
+
+# convert list to dataframe & cleanup
+covid19_df = covid19[0]
+covid19_df = covid19_df.iloc[ : , 1: ]
+covid19_df
+
+#write dataframe to csv file
+bucket = 'your-bucket-name'
+csv_buffer = StringIO()
+opp_df.to_csv(csv_buffer, index = False)
+s3_resource = boto3.resource('s3')
+s3_resource.Object(bucket, your-bucket-name).put(Body=csv_buffer.getvalue())
